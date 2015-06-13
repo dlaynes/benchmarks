@@ -1,7 +1,5 @@
 <?php
 
-//Not finished
-
 class Tape {
     public $pos = 0;
     public $tape = [0];
@@ -90,8 +88,7 @@ class Program {
                     }
                     break;
                 case '.':
-                    $chr = chr($tape->get());
-                    echo $chr ? $chr : '?';
+                    echo chr($tape->get());
                     break;
                 default:
                     break;
