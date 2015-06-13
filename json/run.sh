@@ -24,6 +24,8 @@ echo Nim Gcc
 ../xtime.rb ./json_nim_gcc
 echo Nim Clang
 ../xtime.rb ./json_nim_clang
+echo PHP
+../xtime.rb php test.php
 echo Python Pypy
 ../xtime.rb pypy test.py
 echo Python

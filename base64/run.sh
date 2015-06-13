@@ -26,6 +26,8 @@ echo Scala
 ../xtime.rb scala Base64
 echo Javascript Node
 ../xtime.rb nodejs test.js
+echo PHP
+../xtime.rb php test.php
 echo Python Pypy
 ../xtime.rb pypy test.py
 echo Python
