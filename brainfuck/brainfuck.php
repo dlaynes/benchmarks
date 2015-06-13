@@ -4,18 +4,18 @@
 
 class Tape {
     public $pos = 0;
-    public $tape = [];
+    public $tape = [0];
 
     public function inc(){
-        ++$this->tape[$this->pos];
+        $this->tape[$this->pos] += 1;
     }
 
     public function dec(){
-        --$this->tape[$this->pos];
+        $this->tape[$this->pos] -= 1;
     }
 
     public function advance(){
-        ++$this->pos;
+        $this->pos += 1;
         if(count($this->tape) <= $this->pos ){
             $this->tape[] = 0;
         }
@@ -23,7 +23,7 @@ class Tape {
 
     public function devance(){
         if($this->pos > 0){
-            --$this->pos;
+            $this->pos -= 1;
         }
     }
 
@@ -37,38 +37,36 @@ class Program {
     public $bracket_map = [];
 
     function __construct($code){
-        $pc = $i = 0;
+        $pc = 0;
         $leftstack = [];
         
-        while (isset($code[$i])) {
+        foreach (str_split($code) as $c ) {
 
-            $c = $code[$i];
             if( strpos('+-<>[].,', $c) === FALSE ) {
                 continue;
             }
-            if($c==='['){
+            $this->code .= $c;
+
+            if($c=='['){
                 $leftstack[] = $pc;
-            } elseif($c===']' && count($leftstack) > 0 ){
+            } elseif($c==']' && count($leftstack) > 0 ){
                 $left = array_pop($leftstack);
+                $right = $pc;
 
-                $this->bracket_map[$pc] = $left;
-                $this->bracket_map[$left] = $pc;
+                $this->bracket_map[$right] = $left;
+                $this->bracket_map[$left] = $right;
             }
-            $this->code += $c;
             ++$pc;
-
-            ++$i;
         }
 
     }
 
     function run(){
-        $pc = $i = 0;
+        $pc = 0;
         $tape = new Tape();
 
-        while (isset($this->code[$i])) {
-
-            switch($this->code[$i]){
+        while (isset($this->code[$pc])) {
+            switch($this->code[$pc]){
                 case '+':
                     $tape->inc();
                     break;
@@ -92,14 +90,13 @@ class Program {
                     }
                     break;
                 case '.':
-                    $chr =chr($tape->get());
+                    $chr = chr($tape->get());
                     echo $chr ? $chr : '?';
                     break;
                 default:
                     break;
             }
             ++$pc;
-            ++$i;
         }
     }
 
@@ -110,6 +107,7 @@ $file = '';
 if(isset($argv[1])){
     $file = file_get_contents($argv[1]);
     $pr = new Program($file);
+
     $pr->run();
     echo "\n";
 }
