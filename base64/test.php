@@ -21,4 +21,4 @@ $s = 0;
 for($i=0; $i < $tries; $i++){
     $s += strlen(base64_decode($str2));
 }
-echo sprintf("encode: %d, %f", $s, microtime(true) - $start)."\n";
+echo sprintf("decode: %d, %f", $s, microtime(true) - $start)."\n";

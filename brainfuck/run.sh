@@ -28,6 +28,10 @@ echo Julia
 ../xtime.rb julia brainfuck.jl bench.b
 echo Mono
 ../xtime.rb mono -O=all --gc=sgen brainfuck.exe bench.b
+echo Lua
+../xtime.rb lua brainfuck2.lua bench.b
+echo LuaJIT
+../xtime.rb luajit brainfuck2.lua bench.b
 echo PHP
 ../xtime.rb php brainfuck.php bench.b
 echo Python Pypy
